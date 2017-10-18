@@ -5,7 +5,7 @@ include "db_link.php";
 $arr = $_GET['arr'];
 
 //echo $_POST["8787"];
-$db_connect= new db("root","yiyouyop","crm_tag","127.0.0.1");
+$db_connect= new db("root","","","127.0.0.1");
 //$arr = ['2222','8787'];
 $connect = $db_connect -> data_query($arr);
 

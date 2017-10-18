@@ -4,7 +4,7 @@ include "db_link.php";
 //echo 'test';
 $tag_nm = $_POST["tag_nm"]!='\n' ? $_POST["tag_nm"] : null; 
 $tag_desc = $_POST["tag_desc"]!='\n' ? $_POST["tag_desc"] : null; 
-$db_connect= new db("root","yiyouyop","crm_tag","127.0.0.1");
+$db_connect= new db("root","","","127.0.0.1");
 $connect = $db_connect -> tag_query($tag_nm, $tag_desc);
 
 
