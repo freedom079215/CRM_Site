@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>台新CRM客戶圖像</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!--<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    -->
+    <!-- Custom styles for this template -->
+    <!--
+    <link href="navbar.css" rel="stylesheet">
+    -->
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!--
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+    -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!--ajax script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript">
+    	function tag_query(){
+        //var tag_desc = $('#tag_desc').val();
+    		//var tag_nm = $('#tag_nm').val();
+        arr = localStorage.getItem('onlykey');
+        arr = arr.split(',');
+    		$.ajax({
+    			url: "tag_query.php",
+    			data: {
+    				tag_nm : $('#tag_nm').val(),
+            tag_desc : $('#tag_desc').val()
+    			},
+    			type: "POST",
+    			//dataType : "json",
+          dataType : "html",
+    			success:function(data){
+    					if(data){
+                console.log(data);
+    						console.log(JSON.stringify(data));
+    						//alert('ok');
+                $('#show_data').html(data);
+    						}
+                console.log(arr+"sucess");
+                for(i=0 ; i < arr.length; i++){
+                  a = "tag_inform";
+                  $("#"+arr[i]).css('background','LightCoral  ');
+                  console.log(arr[i]);
+                }
+                $('#tag_amt').text(arr.length);
+
+    					},
+    			error:function(xhr){
+    					alert('Ajax request error'+JSON.stringify(xhr));
+    					//alert(msg+'test');
+
+    					},
+
+    			});
+    		};
+  </script>
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">台新CRM客戶圖像</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+<!--               <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
+              <li><a href="../navbar-static-top/">Static top</a></li> -->
+              <li ><a href="#">TAG <span class="badge" id='tag_amt'></span></a></li><br>
+
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+      	
+		<!--<form id="tag_query_form" > -->
+			<div class="row">
+      			<div class="col-sm-4">
+      				<div class="form-group">
+      				    <input type="email" class="form-control" id="tag_desc" aria-describedby="emailHelp" placeholder="標籤搜尋">
+      				    <small id="emailHelp" class="form-text text-muted">Tips:從客戶特性思考</small>
+      				  </div>      			
+      			</div>
+      			<div class="col-sm-4">
+					 <div class="form-group">
+			      <select class="form-control" id="tag_nm">
+              <option></option>
+			        <option>Homer</option>
+			        <option>test</option>
+			      </select>
+			    </div>
+      			</div>
+      			<div class="col-sm-4">
+					<button type="text" class="btn btn-primary" id="search_btn" onclick="tag_query();">搜尋</button>
+      			</div>
+      		</div>			
+			 
+			  
+
+			<!--<input type="text" name="tag_nm" id="tag_nm" />
+			<select>
+				
+			</select>
+			<input type="button" id="submit" value="搜尋" onclick="tag_query();"/>
+		-->
+		<!--</form> -->
+  
+		
+      <!--	
+        <h1>Navbar example</h1>
+        <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
+        </p>
+       -->
+      </div>
+      <div id="text_show"></div>
+      <div class="jumbotron" id="show_data">
+      	<table class="table">
+         <!--
+          <thead class="thead-inverse">
+
+      	    <tr>
+      	      <th>#</th>
+      	      <th>First Name</th>
+      	      <th>Last Name</th>
+      	      <th>Username</th>
+      	    </tr>
+      	  </thead>
+      	  <tbody>
+      	    <tr>
+      	      <th scope="row">1</th>
+      	      <td>Mark</td>
+      	      <td>Otto</td>
+      	      <td>@mdo</td>
+      	    </tr>
+      	    <tr>
+      	      <th scope="row">2</th>
+      	      <td>Jacob</td>
+      	      <td>Thornton</td>
+      	      <td>@fat</td>
+      	    </tr>
+      	    <tr>
+      	      <th scope="row">3</th>
+      	      <td>Larry</td>
+      	      <td>the Bird</td>
+      	      <td>@twitter</td>
+      	    </tr>
+      	  </tbody>
+      	</table>
+
+      	<table class="table">
+      	  <thead class="thead-default">
+      	    <tr>
+      	      <th>#</th>
+      	      <th>First Name</th>
+      	      <th>Last Name</th>
+      	      <th>Username</th>
+      	    </tr>
+      	  </thead>
+      	  <tbody>
+      	    <tr>
+      	      <th scope="row">1</th>
+      	      <td>Mark</td>
+      	      <td>Otto</td>
+      	      <td>@mdo</td>
+      	    </tr>
+      	    <tr>
+      	      <th scope="row">2</th>
+      	      <td>Jacob</td>
+      	      <td>Thornton</td>
+      	      <td>@fat</td>
+      	    </tr>
+      	    <tr>
+      	      <th scope="row">3</th>
+      	      <td>Larry</td>
+      	      <td>the Bird</td>
+      	      <td>@twitter</td>
+      	    </tr>
+      	  </tbody>
+              -->
+
+      	</table>
+      </div>
+      <a href="./tag_result.html"><button type="button" class="btn btn-primary btn-lg btn-block">載入標籤資訊</button></a>
+
+     <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></
+      script>-->
+      <script>
+        $(function(){
+          var arr = [];
+          $(document).on("click", "#tag_inform tr", function(){
+            
+            
+            if( arr.indexOf($(this).attr("id")) == -1 ) {
+              arr.push($(this).attr("id"));
+              $(this).css('background','LightCoral ');
+              $('#tag_amt').text(arr.length);
+              // localStorage.setItem(arr,arr);
+              // localStorage.setItem($(this).attr("id"), $(this).attr("id"));
+
+              // console.log(localStorage.getItem($(this).attr("id")));
+            }else {
+              arr.splice(arr.indexOf($(this).attr("id")), 1);
+              $(this).css('background','');
+              $('#tag_amt').text(arr.length);
+
+              //localStorage.removeItem($(this).attr("id"), $(this).attr("id"));
+              // console.log(localStorage.getItem($(this).attr("id")));
+            }
+            localStorage.setItem('onlykey', arr);
+            console.log(arr);
+          });
+
+          // $(document).on("click", "#tag_inform tr", function(){
+            
+            
+          //   if( arr.indexOf($(this).attr("id")) == -1 ) {
+          //     arr.push($(this).attr("id"));
+          //     // localStorage.setItem(arr,arr);
+          //     // localStorage.setItem($(this).attr("id"), $(this).attr("id"));
+
+          //     // console.log(localStorage.getItem($(this).attr("id")));
+          //   }else {
+          //     arr.splice(arr.indexOf($(this).attr("id")), 1);
+          //     //localStorage.removeItem($(this).attr("id"), $(this).attr("id"));
+          //     // console.log(localStorage.getItem($(this).attr("id")));
+          //   }
+          //   localStorage.setItem('onlykey', arr);
+          //   console.log(arr);
+          // });
+
+        })
+
+        </script>
+      <script>
+        // $(function(){
+        //   var arr = [];
+        //   $('#search_btn').on("click", function(){
+        //     alert('load');
+        //     console.log('yesorno'+arr);
+
+        //     if( arr.indexOf($(this).attr("id")) == -1 ) {
+        //       console.log('testetst');
+        //       $(this).css('background','red');
+        //       // localStorage.setItem(arr,arr);
+        //       // localStorage.setItem($(this).attr("id"), $(this).attr("id"));
+
+        //       // console.log(localStorage.getItem($(this).attr("id")));
+        //     }else {
+        //       $(this).css('background','white');
+
+        //       //localStorage.removeItem($(this).attr("id"), $(this).attr("id"));
+        //       // console.log(localStorage.getItem($(this).attr("id")));
+        //     }
+        //     localStorage.setItem('onlykey', arr);
+            
+        //     console.log(arr)
+        //   });
+        // })
+      </script>
+  </body>
+</html>

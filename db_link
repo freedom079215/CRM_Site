@@ -1,0 +1,20 @@
+<?php
+class db
+{
+   protected $host;
+   protected $user;
+   protected $db;
+   protected $pass;
+   public $sql_result;
+   //public $link;
+    
+   //public function mysql_connect("localhost","suggestion_box","presiDENT57014");
+   public function __construct($user,$pass,$db,$host)
+    {
+    $this->user = $user;
+    $this->pass = $pass;
+    $this->db = $db;
+    $this->host = $host;
+    //$this->process();
+    }
+?>
